@@ -41,17 +41,27 @@ const queryPhoneNumber = (phoneNumber, listOfPriceQuotes) => {
   //assign temporary value for validation
   let bestPriceQuote = { operator: null, prefix: "", price: null };
 
+  //Sort list by operator
+  const sortedListOfPriceQuotes = listOfPriceQuotes.sort(
+    (a, b) => a.operator - b.operator
+  );
+
   //iterates the list of price quotes and checks for longest prefix and or best price
-  for (priceQuote of listOfPriceQuotes) {
-    let prefix = priceQuote.prefix.toString();
-    let price = priceQuote.price;
+  for (priceQuote of sortedListOfPriceQuotes) {
+    const prefix = priceQuote.prefix.toString();
+    const price = priceQuote.price;
+    const operator = priceQuote.operator;
 
     //matching prefix will be checked with the current bestPriceQuote prefix and compare its length and price
     if (phoneNumber.startsWith(prefix)) {
-      if (
-        prefix.length > bestPriceQuote.prefix.length ||
-        (prefix.length === bestPriceQuote.prefix.length &&
-          price < bestPriceQuote.price)
+      //same operator, price is different
+      if (operator == bestPriceQuote.operator && price < bestPriceQuote.price) {
+        bestPriceQuote = priceQuote;
+      }
+      //different operator, prefix length is different
+      else if (
+        operator != bestPriceQuote.operator &&
+        prefix.length > bestPriceQuote.prefix.length
       ) {
         bestPriceQuote = priceQuote;
       }

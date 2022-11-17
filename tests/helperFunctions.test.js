@@ -205,7 +205,7 @@ describe("Tests for helper function: queryPhoneNumber", () => {
     ];
 
     expect(queryPhoneNumber(phoneNumber, listOfPriceQuotes)).toMatch(
-      /178742 A 1787 2.86/
+      /178742 B 178 2/
     );
   });
 });
