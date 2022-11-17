@@ -2,7 +2,7 @@
   "name": "prisec",
   "version": "1.0.0",
   "description": "",
-  "main": "nodeSolution.js",
+  "main": "phoneNumberQuotes.js",
   "scripts": {
     "test": "jest"
   },
